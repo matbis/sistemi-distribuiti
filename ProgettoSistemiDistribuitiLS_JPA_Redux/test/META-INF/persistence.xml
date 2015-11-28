@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence
+	xmlns="http://java.sun.com/xml/ns/persistence"
+   	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    					http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+   version="1.0">
+   
+	<persistence-unit name="sistemiDistribuitiLS" transaction-type="RESOURCE_LOCAL">
+		
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<!-- 
+		<jta-data-source>java:/jdbc/sistemiDistribuitiLS</jta-data-source>
+		 -->
+		
+		<!-- List of annotated classes -->
+		<class>it.unibo.sdls.sampleproject.dao.Author</class>
+		<class>it.unibo.sdls.sampleproject.dao.Book</class>
+		<class>it.unibo.sdls.sampleproject.dao.Publisher</class>
+		<exclude-unlisted-classes/>
+
+		<properties>
+		
+			<!-- not necessary if binding DataSource from JNDI -->
+			<property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" />
+			<property name="hibernate.connection.url" value="jdbc:hsqldb:hsql://localhost/my_database_name" />
+			<property name="hibernate.connection.username" value="sa" />
+			<property name="hibernate.connection.password" value=""/>
+		
+			<!-- Print SQL to stdout -->
+			<property name="hibernate.show_sql" value="true"/>
+			
+			<property name="hibernate.format_sql" value="true" />
+			
+			<!-- 
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			 -->
+			
+			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" /> -->
+			
+			<!-- Automatic detection of annotated classes and XML mapping files -->
+			<!-- <property name="hibernate.archive.autodetection" value="class, hbm"/> -->	
+			
+			<!--  create non-existing tables automatically  -->
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+			
+		</properties>
+		
+	</persistence-unit>
+   
+</persistence>
+

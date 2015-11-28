@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="it.unibo.sdls.sampleproject.dao.Author" table="authors">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+    </class>
+    
+    <class name="it.unibo.sdls.sampleproject.dao.Publisher" table="publishers">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name"/>
+    </class>
+    
+    <class name="it.unibo.sdls.sampleproject.dao.Book" table="books">
+        <id name="id" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="title"/>
+        <property name="isbn10"/>
+        <property name="isbn13"/>
+    	<set name="authors" table="authors_books">  
+	    	<key column="book_id"/>  
+	    	<many-to-many column="author_id" class="it.unibo.sdls.sampleproject.dao.Author"/>  
+    	</set> 
+		<many-to-one name="publisher" class="it.unibo.sdls.sampleproject.dao.Publisher" column="publisher_id"/>
+    </class>
+
+</hibernate-mapping>
