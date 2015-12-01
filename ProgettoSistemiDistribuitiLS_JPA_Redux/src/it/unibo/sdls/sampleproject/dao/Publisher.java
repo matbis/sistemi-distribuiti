@@ -2,10 +2,21 @@ package it.unibo.sdls.sampleproject.dao;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Publisher {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int id;
 	protected String name;
+	@OneToMany(mappedBy="book", cascade=CascadeType.ALL)
 	protected Set<Book> books;
 	
 	// ------------------------------------------

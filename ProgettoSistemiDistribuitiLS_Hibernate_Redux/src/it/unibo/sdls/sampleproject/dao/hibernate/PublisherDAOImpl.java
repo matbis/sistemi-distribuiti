@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 
-import it.unibo.sdls.sampleproject.dao.Author;
 import it.unibo.sdls.sampleproject.dao.Publisher;
 import it.unibo.sdls.sampleproject.dao.PublisherDAO;
 

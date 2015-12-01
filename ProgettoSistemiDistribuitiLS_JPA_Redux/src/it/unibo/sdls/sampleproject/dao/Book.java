@@ -2,14 +2,27 @@ package it.unibo.sdls.sampleproject.dao;
 
 import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Book {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int id;
 	protected String title;
 	protected String isbn10;
 	protected String isbn13;
+	@ManyToMany(mappedBy="book", fetch=FetchType.EAGER)
 	protected Set<Author> authors;
-	protected Publisher publisher;
+	@ManyToOne(fetch=FetchType.EAGER, optional=false)
+	protected Publisher publisher; 
 	
 	// ------------------------------------------
 	// Constructors
