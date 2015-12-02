@@ -1,22 +1,28 @@
 package it.unibo.sdls.sampleproject.dao;
 
+import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Publisher {
+@Table(name="publishers")
+public class Publisher implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name="publisher_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int id;
 	protected String name;
-	@OneToMany(mappedBy="book", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="publisher")
 	protected Set<Book> books;
 	
 	// ------------------------------------------

@@ -12,12 +12,15 @@ import it.unibo.sdls.sampleproject.dao.AuthorDAO;
 
 public class AuthorJPAImpl implements AuthorDAO {
 	
-	EntityManagerFactory emf = null;
+	private static EntityManagerFactory emf = null;
+	static {
+		emf = Persistence.createEntityManagerFactory("sistemiDistribuitiLS");
+	}
 	EntityManager em = null;
 	EntityTransaction tx = null;
 	
 	public AuthorJPAImpl() {
-		emf = Persistence.createEntityManagerFactory("sistemiDistribuitiLS");
+		//emf = Persistence.createEntityManagerFactory("sistemiDistribuitiLS");
 	}
 	
 	public int insertAuthor(Author author) {
@@ -82,7 +85,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			List<Author> authors = em.createQuery("SELECT a FROM Author WHERE a.name LIKE :name").setParameter("name", name).getResultList();
+			List<Author> authors = em.createQuery("SELECT a FROM Author a WHERE a.name LIKE :name").setParameter("name", name).getResultList();
 			author = authors.get(0);
 			tx.commit();
 		} catch(Exception e) {
@@ -119,7 +122,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			authors = em.createQuery("SELECT * FROM Author").getResultList();
+			authors = em.createQuery("SELECT a FROM Author a").getResultList();
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null && tx.isActive())

@@ -43,7 +43,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			List<Publisher> publishers = em.createQuery("SELECT a FROM Publisher WHERE a.name LIKE :name").setParameter("name", name).getResultList();
+			List<Publisher> publishers = em.createQuery("SELECT p FROM Publisher p WHERE p.name LIKE :name").setParameter("name", name).getResultList();
 			publisher = publishers.get(0);
 			tx.commit();
 		} catch(Exception e) {
@@ -80,7 +80,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			List<Publisher> publishers = em.createQuery("SELECT a FROM Publisher WHERE a.name LIKE :name").setParameter("name", name).getResultList();
+			List<Publisher> publishers = em.createQuery("SELECT p FROM Publisher p WHERE p.name LIKE :name").setParameter("name", name).getResultList();
 			count = publishers.size();
 			for(Publisher p : publishers) {
 				em.remove(p);
@@ -119,7 +119,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			publishers = em.createQuery("SELECT * FROM Publisher").getResultList();
+			publishers = em.createQuery("SELECT p FROM Publisher p").getResultList();
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null && tx.isActive())

@@ -1,27 +1,38 @@
 package it.unibo.sdls.sampleproject.dao;
 
+import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Book {
+@Table(name="books")
+public class Book implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name="book_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int id;
 	protected String title;
 	protected String isbn10;
 	protected String isbn13;
-	@ManyToMany(mappedBy="book", fetch=FetchType.EAGER)
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name="books_authors", joinColumns=@JoinColumn(name="book_id"), inverseJoinColumns=@JoinColumn(name="author_id"))
 	protected Set<Author> authors;
-	@ManyToOne(fetch=FetchType.EAGER, optional=false)
+	@ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE})
+	@JoinColumn(name="publisher_id")
 	protected Publisher publisher; 
 	
 	// ------------------------------------------
