@@ -34,17 +34,20 @@ public class TxDAOFactoryImpl extends TxDAOFactory {
 
 	@Override
 	public AuthorDAO getAuthorDAO() {
-		return new AuthorJPAImpl();
+		return new AuthorJPAImpl(this);
 	}
 
 	@Override
 	public BookDAO getBookDAO() {
-		return new BookJPAImpl();
+		return new BookJPAImpl(this);
 	}
 
 	@Override
 	public PublisherDAO getPublisherDAO() {
-		return new PublisherJPAImpl();
+		return new PublisherJPAImpl(this);
 	}
 
+	public EntityManager getEntityManager() {
+		return this.em;
+	}
 }

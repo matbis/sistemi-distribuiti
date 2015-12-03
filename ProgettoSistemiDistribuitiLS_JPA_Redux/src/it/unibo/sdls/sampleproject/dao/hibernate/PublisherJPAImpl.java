@@ -3,25 +3,26 @@ package it.unibo.sdls.sampleproject.dao.hibernate;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+//import javax.persistence.EntityManagerFactory;
+//import javax.persistence.EntityTransaction;
+//import javax.persistence.Persistence;
 
 import it.unibo.sdls.sampleproject.dao.Publisher;
 import it.unibo.sdls.sampleproject.dao.PublisherDAO;
 
 public class PublisherJPAImpl implements PublisherDAO {
 
-	EntityManagerFactory emf = null;
+	//EntityManagerFactory emf = null;
 	EntityManager em = null;
 	//EntityTransaction tx = null;
 	
-	public PublisherJPAImpl() {
-		emf = Persistence.createEntityManagerFactory("sistemiDistribuitiLS");
+	public PublisherJPAImpl(TxDAOFactoryImpl factory) {
+		//emf = Persistence.createEntityManagerFactory("sistemiDistribuitiLS");
+		this.em = factory.getEntityManager();
 	}
 	
 	public int insertPublisher(Publisher publisher) {
-		em = emf.createEntityManager();
+		//em = emf.createEntityManager();
 		try {
 			//tx = em.getTransaction();
 			//tx.begin();
@@ -42,7 +43,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 	}
 
 	public Publisher findPublisherByName(String name) {
-		em = emf.createEntityManager();
+		//em = emf.createEntityManager();
 		Publisher publisher = null;
 		try {
 			//tx = em.getTransaction();
@@ -61,7 +62,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 	}
 
 	public Publisher findPublisherById(int id) {
-		em = emf.createEntityManager();
+		//em = emf.createEntityManager();
 		Publisher publisher = null;
 		try {
 			//tx = em.getTransaction();
@@ -79,7 +80,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 	}
 
 	public int removePublisherByName(String name) {
-		em = emf.createEntityManager();
+		//em = emf.createEntityManager();
 		int count = 0;
 		try {
 			//tx = em.getTransaction();
@@ -101,7 +102,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 	}
 
 	public int removePublisherById(int id) {
-		em = emf.createEntityManager();
+		//em = emf.createEntityManager();
 		try {
 			//tx = em.getTransaction();
 			//tx.begin();
@@ -118,7 +119,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 	}
 
 	public List<Publisher> findAllPublishers() {
-		em = emf.createEntityManager();
+		//em = emf.createEntityManager();
 		List<Publisher> publishers = null;
 		try {
 			//tx = em.getTransaction();
