@@ -28,7 +28,11 @@ public class AuthorJPAImpl implements AuthorDAO {
 		try {
 			tx = em.getTransaction();
 			tx.begin();
-			em.persist(author);
+			if(em.find(Author.class, author.getId()) != null) {
+				author = em.merge(author);
+			} else {
+				em.persist(author);
+			}
 			tx.commit();
 		} catch(Exception e) {
 			if(tx != null && tx.isActive())

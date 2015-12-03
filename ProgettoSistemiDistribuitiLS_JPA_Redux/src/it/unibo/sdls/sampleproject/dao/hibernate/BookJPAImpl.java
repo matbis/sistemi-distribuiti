@@ -26,7 +26,11 @@ public class BookJPAImpl implements BookDAO {
 		em = emf.createEntityManager();
 		try {
 			tx = em.getTransaction();
-			tx.begin();
+			if(em.find(Book.class, book.getId()) != null) {
+				book = em.merge(book);
+			} else {
+				tx.begin();
+			}
 			em.persist(book);
 			tx.commit();
 		} catch(Exception e) {

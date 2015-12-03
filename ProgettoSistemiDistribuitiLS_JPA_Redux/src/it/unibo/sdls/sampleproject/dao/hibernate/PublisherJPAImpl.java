@@ -14,7 +14,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 
 	EntityManagerFactory emf = null;
 	EntityManager em = null;
-	EntityTransaction tx = null;
+	//EntityTransaction tx = null;
 	
 	public PublisherJPAImpl() {
 		emf = Persistence.createEntityManagerFactory("sistemiDistribuitiLS");
@@ -23,13 +23,17 @@ public class PublisherJPAImpl implements PublisherDAO {
 	public int insertPublisher(Publisher publisher) {
 		em = emf.createEntityManager();
 		try {
-			tx = em.getTransaction();
-			tx.begin();
-			em.persist(publisher);
-			tx.commit();
+			//tx = em.getTransaction();
+			//tx.begin();
+			if(em.find(Publisher.class, publisher.getId()) != null) {
+				publisher = em.merge(publisher);
+			} else {
+				em.persist(publisher);
+			}
+			//tx.commit();
 		} catch(Exception e) {
-			if(tx != null && tx.isActive())
-				tx.rollback();
+			//if(tx != null && tx.isActive())
+			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
 			em.close();
@@ -41,14 +45,14 @@ public class PublisherJPAImpl implements PublisherDAO {
 		em = emf.createEntityManager();
 		Publisher publisher = null;
 		try {
-			tx = em.getTransaction();
-			tx.begin();
+			//tx = em.getTransaction();
+			//tx.begin();
 			List<Publisher> publishers = em.createQuery("SELECT p FROM Publisher p WHERE p.name LIKE :name").setParameter("name", name).getResultList();
 			publisher = publishers.get(0);
-			tx.commit();
+			//tx.commit();
 		} catch(Exception e) {
-			if(tx != null && tx.isActive())
-				tx.rollback();
+			//if(tx != null && tx.isActive())
+			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
 			em.close();
@@ -60,13 +64,13 @@ public class PublisherJPAImpl implements PublisherDAO {
 		em = emf.createEntityManager();
 		Publisher publisher = null;
 		try {
-			tx = em.getTransaction();
-			tx.begin();
+			//tx = em.getTransaction();
+			//tx.begin();
 			publisher = em.find(Publisher.class, id);
-			tx.commit();
+			//tx.commit();
 		} catch(Exception e) {
-			if(tx != null && tx.isActive())
-				tx.rollback();
+			//if(tx != null && tx.isActive())
+			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
 			em.close();
@@ -78,17 +82,17 @@ public class PublisherJPAImpl implements PublisherDAO {
 		em = emf.createEntityManager();
 		int count = 0;
 		try {
-			tx = em.getTransaction();
-			tx.begin();
+			//tx = em.getTransaction();
+			//tx.begin();
 			List<Publisher> publishers = em.createQuery("SELECT p FROM Publisher p WHERE p.name LIKE :name").setParameter("name", name).getResultList();
 			count = publishers.size();
 			for(Publisher p : publishers) {
 				em.remove(p);
 			}
-			tx.commit();
+			//tx.commit();
 		} catch(Exception e) {
-			if(tx != null && tx.isActive())
-				tx.rollback();
+			//if(tx != null && tx.isActive())
+			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
 			em.close();
@@ -99,13 +103,13 @@ public class PublisherJPAImpl implements PublisherDAO {
 	public int removePublisherById(int id) {
 		em = emf.createEntityManager();
 		try {
-			tx = em.getTransaction();
-			tx.begin();
+			//tx = em.getTransaction();
+			//tx.begin();
 			em.remove(em.find(Publisher.class, id));
-			tx.commit();
+			//tx.commit();
 		} catch(Exception e) {
-			if(tx != null && tx.isActive())
-				tx.rollback();
+			//if(tx != null && tx.isActive())
+			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
 			em.close();
@@ -117,13 +121,13 @@ public class PublisherJPAImpl implements PublisherDAO {
 		em = emf.createEntityManager();
 		List<Publisher> publishers = null;
 		try {
-			tx = em.getTransaction();
-			tx.begin();
+			//tx = em.getTransaction();
+			//tx.begin();
 			publishers = em.createQuery("SELECT p FROM Publisher p").getResultList();
-			tx.commit();
+			//tx.commit();
 		} catch(Exception e) {
-			if(tx != null && tx.isActive())
-				tx.rollback();
+			//if(tx != null && tx.isActive())
+			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
 			em.close();
