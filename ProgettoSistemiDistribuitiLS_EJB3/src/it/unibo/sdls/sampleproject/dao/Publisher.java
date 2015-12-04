@@ -15,7 +15,10 @@ import javax.persistence.Table;
 @Table(name="publishers")
 public class Publisher implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 6423572771817481733L;
 	
 	@Id
 	@Column(name="publisher_id")

@@ -8,43 +8,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name="publishers")
-public class Publisher implements Serializable {
+@Table(name="authors")
+public class Author implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * Serial Version UID 
+	 */
+	private static final long serialVersionUID = 3103905839384102117L;
+
 	@Id
-	@Column(name="publisher_id")
+	@Column(name="author_id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	protected int id;
+	
 	protected String name;
-	@OneToMany(mappedBy="publisher")
+	
+	@ManyToMany(mappedBy="authors")
 	protected Set<Book> books;
 	
-	// ------------------------------------------
-	// Constructors
-	// ------------------------------------------
-	public Publisher() {}
+	public Author() {}
 	
-	public Publisher(String name) {
+	public Author(String name) {
 		this.name = name;
 	}
 	
-	// ------------------------------------------
-	// Getter and Setter methods
-	// ------------------------------------------
-
-	public int getId() {
-		return id;
+	public Author(String name, Set<Book> books) {
+		this.name = name;
+		this.books = books;
 	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 	public String getName() {
 		return name;
@@ -54,6 +51,14 @@ public class Publisher implements Serializable {
 		this.name = name;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Set<Book> getBooks() {
 		return books;
 	}
@@ -61,5 +66,5 @@ public class Publisher implements Serializable {
 	public void setBooks(Set<Book> books) {
 		this.books = books;
 	}
-	
+
 }

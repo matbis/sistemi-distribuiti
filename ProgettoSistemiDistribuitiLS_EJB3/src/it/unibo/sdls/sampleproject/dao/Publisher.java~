@@ -3,26 +3,14 @@ package it.unibo.sdls.sampleproject.dao;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="publishers")
-public class Publisher implements Serializable {
+public class Publisher {
 	
-	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@Column(name="publisher_id")
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 6423572771817481733L;
 	protected int id;
 	protected String name;
-	@OneToMany(mappedBy="publisher")
 	protected Set<Book> books;
 	
 	// ------------------------------------------
@@ -38,6 +26,8 @@ public class Publisher implements Serializable {
 	// Getter and Setter methods
 	// ------------------------------------------
 
+	@Id
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -46,6 +36,7 @@ public class Publisher implements Serializable {
 		this.id = id;
 	}
 
+	@Column(unique = true)
 	public String getName() {
 		return name;
 	}
@@ -54,6 +45,11 @@ public class Publisher implements Serializable {
 		this.name = name;
 	}
 
+	@OneToMany(
+			fetch=FetchType.LAZY,
+			cascade={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH},
+			mappedBy="publisher"
+	)
 	public Set<Book> getBooks() {
 		return books;
 	}
