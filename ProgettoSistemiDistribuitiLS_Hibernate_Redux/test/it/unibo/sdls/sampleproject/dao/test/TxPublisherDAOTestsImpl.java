@@ -7,4 +7,6 @@ public class TxPublisherDAOTestsImpl extends TxPublisherDAOTests {
 		return "it.unibo.sdls.sampleproject.dao.hibernate.TxDAOFactoryImpl";
 	}
 
+	
+
 }

@@ -37,7 +37,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return publisher.getId();
 	}
@@ -56,7 +56,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return publisher;
 	}
@@ -74,7 +74,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return publisher;
 	}
@@ -96,7 +96,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return count;
 	}
@@ -113,7 +113,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return id;
 	}
@@ -131,7 +131,7 @@ public class PublisherJPAImpl implements PublisherDAO {
 			//	tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return publishers;
 	}

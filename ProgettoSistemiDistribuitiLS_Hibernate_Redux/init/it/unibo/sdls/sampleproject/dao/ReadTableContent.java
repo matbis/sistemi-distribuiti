@@ -16,7 +16,7 @@ public class ReadTableContent {
 			dao = args[0];
 		
 		// recupero dei dao
-		TxDAOFactory txDAOFactory = TxDAOFactory.get(dao);
+		TxDAOFactory txDAOFactory = TxDAOFactory.get("it.unibo.sdls.sampleproject.dao.hibernate.TxDAOFactoryImpl");
 		BookDAO bookDAO = txDAOFactory.getBookDAO();
 		AuthorDAO authorDAO = txDAOFactory.getAuthorDAO();
 		PublisherDAO publisherDAO = txDAOFactory.getPublisherDAO();

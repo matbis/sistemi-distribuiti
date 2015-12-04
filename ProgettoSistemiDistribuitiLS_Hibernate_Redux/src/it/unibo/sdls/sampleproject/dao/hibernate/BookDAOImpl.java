@@ -3,6 +3,7 @@ package it.unibo.sdls.sampleproject.dao.hibernate;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
@@ -15,236 +16,255 @@ import it.unibo.sdls.sampleproject.dao.Publisher;
 
 public class BookDAOImpl implements BookDAO {
 
+	private Session session = null;
+	private TxDAOFactoryImpl factory;
+	
+	public BookDAOImpl(TxDAOFactoryImpl factory) {
+		session = factory.getSession();
+		this.factory = factory;
+	}
+	
 	public int addBook(Book book) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		int id = 0;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			id = (Integer) session.save(book);
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return id;
 	}
 
 	public int deleteBook(int id) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			session.delete(session.load(Book.class, id));
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return id;
 	}
 
 	public Book getBookById(int id) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		Book book = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			book = (Book) session.load(Book.class, id);
-			tx.commit();
+			//tx.commit();
+		} catch (ObjectNotFoundException nfe) {
+			// per evitare find su id inesistente
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return book;
 	}
 
 	public Book getBookByISBN10(String isbn10) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		Book book = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Book.class);
 			criteria.add(Restrictions.eq("isbn10", isbn10));
 			List<Book> books = criteria.list();
 			book = books.get(0);
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return book;
 	}
 
 	public Book getBookByISBN13(String isbn13) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		Book book = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Book.class);
 			criteria.add(Restrictions.eq("isbn13", isbn13));
 			List<Book> books = criteria.list();
 			book = books.get(0);
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return book;
 	}
 
 	public Book getBookByTitle(String title) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		Book book = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Book.class);
 			criteria.add(Restrictions.eq("title", title));
 			List<Book> books = criteria.list();
 			book = books.get(0);
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return book;
 	}
 
 	public List<Book> getAllBooks() {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		List<Book> books = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Book.class);
 			books = criteria.list();
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return books;
 	}
 
 	public List<Book> getAllBooksByAuthor(Author author) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		List<Book> books = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			String query = "from Book b join b.authors a where a.id = :id";
 			books = session.createQuery(query).setInteger("id", author.getId()).list();
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return books;
 	}
 
 	public List<Book> getAllBooksByPublisher(Publisher publisher) {
-		Session session = openSession();
-		Transaction tx = null;
+		//Session session = openSession();
+		//Transaction tx = null;
 		List<Book> books = null;
 		try {
-			tx = session.beginTransaction();
+			//tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Book.class);
 			criteria.add(Restrictions.eq("publisher", publisher));
 			books = criteria.list();
-			tx.commit();
+			//tx.commit();
 		} catch (Exception e) {
-			if (tx != null){
-		    	  try{
-		    		  tx.rollback();
-		    	  }
-		    	  catch(Exception e2){
-		    		  e2.printStackTrace();
-		    	  }
-		      }
+//			if (tx != null){
+//		    	  try{
+//		    		  tx.rollback();
+//		    	  }
+//		    	  catch(Exception e2){
+//		    		  e2.printStackTrace();
+//		    	  }
+//		      }
 		      e.printStackTrace();
+		      factory.setTxError(true);
 		} finally {
-			session.close();
+			//session.close();
 		}
 		return books;
 	}
 	
-	private Session openSession() {
-		return new Configuration().configure().buildSessionFactory().openSession();
-	}
+//	private Session openSession() {
+//		return new Configuration().configure().buildSessionFactory().openSession();
+//	}
 
 }

@@ -39,7 +39,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 				//tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return author.getId();
 	}
@@ -61,7 +61,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return count;
 	}
@@ -78,7 +78,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return id;
 	}
@@ -97,7 +97,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return author;
 	}
@@ -115,7 +115,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return author;
 	}
@@ -133,7 +133,7 @@ public class AuthorJPAImpl implements AuthorDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return authors;
 	}

@@ -39,7 +39,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return book.getId();
 	}
@@ -56,7 +56,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return id;
 	}
@@ -74,7 +74,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return book;
 	}
@@ -93,7 +93,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return book;
 	}
@@ -112,7 +112,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return book;
 	}
@@ -131,7 +131,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return book;
 	}
@@ -149,7 +149,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return books;
 	}
@@ -167,7 +167,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return books;
 	}
@@ -185,7 +185,7 @@ public class BookJPAImpl implements BookDAO {
 //				tx.rollback();
 		    e.printStackTrace();
 		} finally {
-			em.close();
+			//em.close();
 		}
 		return books;
 	}
