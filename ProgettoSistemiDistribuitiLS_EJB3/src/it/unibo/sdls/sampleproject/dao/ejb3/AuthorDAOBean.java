@@ -14,7 +14,8 @@ import it.unibo.sdls.sampleproject.dao.Author;
 @Stateless
 public class AuthorDAOBean implements AuthorDAOBeanRemote, AuthorDAOBeanLocal {
 
-    @PersistenceContext EntityManager em;
+    @PersistenceContext 
+    EntityManager em;
     
     public AuthorDAOBean() {
      
