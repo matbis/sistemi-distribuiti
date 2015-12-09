@@ -1,5 +1,15 @@
 Testsuite: it.unibo.sdls.sampleproject.dao.tests.online.AuthorDAOTest
-Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 1,065 sec
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.369 sec
 
-Testcase: addAuthor took 0,513 sec
-Testcase: addAuthor_andRelatedBooks took 0,466 sec
+Testcase: addAuthor_andRelatedBooks took 0.257 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at it.unibo.sdls.sampleproject.dao.tests.online.AuthorDAOTest.addAuthor_andRelatedBooks(AuthorDAOTest.java:97)
+
+Testcase: addAuthor took 0.027 sec
+	Caused an ERROR
+null
+java.lang.NullPointerException
+	at it.unibo.sdls.sampleproject.dao.tests.online.AuthorDAOTest.addAuthor(AuthorDAOTest.java:33)
+

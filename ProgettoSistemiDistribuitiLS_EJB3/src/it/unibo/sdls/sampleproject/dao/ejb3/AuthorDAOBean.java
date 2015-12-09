@@ -2,19 +2,24 @@ package it.unibo.sdls.sampleproject.dao.ejb3;
 
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import it.unibo.sdls.sampleproject.dao.Author;
+import it.unibo.sdls.sampleproject.dao.AuthorDAO;
 
 /**
  * Session Bean implementation class AuthorDAOBean
  */
 @Stateless
-public class AuthorDAOBean implements AuthorDAOBeanRemote, AuthorDAOBeanLocal {
+@Local(AuthorDAO.class)
+@Remote(AuthorDAO.class)
+public class AuthorDAOBean implements AuthorDAO {
 
-    @PersistenceContext 
+    @PersistenceContext(unitName="SampleProjectUnit") 
     EntityManager em;
     
     public AuthorDAOBean() {
@@ -65,8 +70,7 @@ public class AuthorDAOBean implements AuthorDAOBeanRemote, AuthorDAOBeanLocal {
 	public Author findAuthorByName(String name) {
 		Author author = null;
 		try {
-			List<Author> authors = em.createQuery("SELECT a FROM Author a WHERE a.name LIKE :name").setParameter("name", name).getResultList();
-			author = authors.get(0);
+			author = (Author) em.createQuery("SELECT a FROM Author a WHERE a.name LIKE :name").setParameter("name", name).getSingleResult();
 		} catch(Exception e) {
 		    e.printStackTrace();
 		}

@@ -2,21 +2,26 @@ package it.unibo.sdls.sampleproject.dao.ejb3;
 
 import java.util.List;
 
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import it.unibo.sdls.sampleproject.dao.Author;
 import it.unibo.sdls.sampleproject.dao.Book;
+import it.unibo.sdls.sampleproject.dao.BookDAO;
 import it.unibo.sdls.sampleproject.dao.Publisher;
 
 /**
  * Session Bean implementation class BookDAOBean
  */
 @Stateless
-public class BookDAOBean implements BookDAOBeanRemote, BookDAOBeanLocal {
+@Local(BookDAO.class)
+@Remote(BookDAO.class)
+public class BookDAOBean implements BookDAO {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="SampleProjectUnit")
 	EntityManager em;
 
 	public BookDAOBean() {
